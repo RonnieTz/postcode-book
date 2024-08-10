@@ -5,6 +5,11 @@ import {
   AccordionDetails,
   List,
   ListItem,
+  Divider,
+  Table,
+  TableBody,
+  TableRow,
+  TableCell,
 } from '@mui/material';
 import React from 'react';
 import AddDate from './AddDate';
@@ -38,18 +43,25 @@ const DateCell = ({ data, setListings }: Props) => {
       </AccordionSummary>
       <AccordionDetails>
         <List>
-          {data.datesVisited.map((date, index) => (
-            <ListItem
-              sx={{
-                display: 'flex',
-                justifyContent: 'center',
-                alignItems: 'center',
-              }}
-              key={index}
-            >
-              {date}
-            </ListItem>
-          ))}
+          <Divider variant="fullWidth" />
+          <ListItem>
+            <Table size="small" sx={{ width: '100%' }}>
+              <TableBody>
+                {data.datesVisited.map((date, index) => {
+                  return (
+                    <TableRow>
+                      <TableCell align="right">
+                        <Typography fontSize={13}>{index + 1}:</Typography>
+                      </TableCell>
+                      <TableCell align="center">
+                        <Typography fontWeight={600}>{date}</Typography>
+                      </TableCell>
+                    </TableRow>
+                  );
+                })}
+              </TableBody>
+            </Table>
+          </ListItem>
           <ListItem
             sx={{
               display: 'flex',
