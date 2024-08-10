@@ -42,5 +42,4 @@ export const addListing = async function (
     console.log('Error', error);
     return { message: 'Error adding listing', successfull: false };
   }
-  return { message: 'Not implemented', successfull: false };
 };

@@ -16,35 +16,16 @@ import {
   Button,
 } from '@mui/material';
 import React, { useEffect, useState } from 'react';
-import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
+import AddDate from './AddDate';
 import AddButton from './AddButton';
 import { fetchListings } from '@/utilities/actions/fetchListings';
-import { revalidatePath } from 'next/cache';
-
-// const sampleData = [
-//   {
-//     postcode: 'SW1A 1AA',
-//     siteManager: 'John Doe',
-//     datesVisited: ['01/01/2021', '02/01/2021', '03/01/2021', '04/01/2021'],
-//   },
-//   {
-//     postcode: 'SW1A 1AB',
-//     siteManager: 'Jane Doe',
-//     datesVisited: ['01/01/2021', '02/01/2021', '03/01/2021', '04/01/2021'],
-//   },
-//   {
-//     postcode: 'SW1A 1AC',
-//     siteManager: 'John Doe',
-//     datesVisited: ['01/01/2021', '02/01/2021', '03/01/2021', '04/01/2021'],
-//   },
-// ];
 
 const DataTable = () => {
   const [listings, setListings] = useState<
     {
       _id: string;
       postCode: string;
-      siteManger: string;
+      siteManager: string;
       datesVisited: string[];
     }[]
   >([]);
@@ -59,11 +40,13 @@ const DataTable = () => {
     };
     fetchData();
   }, []);
+  console.log(listings);
   return (
     <Box marginTop={5} maxWidth={'100vw'}>
       <Table sx={{ maxWidth: '100vw' }}>
         <TableHead>
           <TableRow>
+            <TableCell align="center">SITE NAME</TableCell>
             <TableCell align="center">POSTCODE</TableCell>
             <TableCell align="center">SITE MANAGER</TableCell>
             <TableCell align="center">DATES VISITED</TableCell>
@@ -72,8 +55,9 @@ const DataTable = () => {
         <TableBody>
           {listings.map((data, index) => (
             <TableRow key={index}>
+              <TableCell align="center">Site Name</TableCell>
               <TableCell align="center">{data.postCode}</TableCell>
-              <TableCell align="center">{data.siteManger}</TableCell>
+              <TableCell align="center">{data.siteManager}</TableCell>
               <TableCell align="center">
                 <Accordion>
                   <AccordionSummary>
@@ -100,9 +84,7 @@ const DataTable = () => {
                           alignItems: 'center',
                         }}
                       >
-                        <Button>
-                          <AddCircleOutlineIcon />
-                        </Button>
+                        <AddDate setListings={setListings} id={data._id} />
                       </ListItem>
                     </List>
                   </AccordionDetails>

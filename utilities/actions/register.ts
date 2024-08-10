@@ -12,7 +12,6 @@ export const register = async function (
   const username = formData.get('username') as string;
   const password = formData.get('password') as string;
   const confirmPassword = formData.get('confirmPassword') as string;
-  console.log(Boolean(username), Boolean(password), Boolean(confirmPassword));
 
   try {
     await connectToDatabase();

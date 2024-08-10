@@ -25,8 +25,6 @@ const Login = () => {
       sessionStorage.setItem('token', state.token as string);
     }
     if (state?.successFull) {
-      console.log('Login successful');
-
       setTimeout(() => {
         window.location.href = '/';
       }, 200);

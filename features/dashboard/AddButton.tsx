@@ -21,7 +21,7 @@ const AddButton = ({
       {
         _id: string;
         postCode: string;
-        siteManger: string;
+        siteManager: string;
         datesVisited: string[];
       }[]
     >
@@ -45,7 +45,6 @@ const AddButton = ({
 
     const fetchData = async () => {
       const data = await fetchListings(token.current);
-      console.log(data);
 
       setListings(await JSON.parse(data).listings);
     };
