@@ -8,6 +8,7 @@ import {
   Checkbox,
   FormControlLabel,
   Typography,
+  Alert,
 } from '@mui/material';
 import Link from 'next/link';
 import { login } from '@/utilities/actions/login';
@@ -33,12 +34,20 @@ const Login = () => {
 
   return (
     <form action={action} className="login">
-      <TextField name="username" sx={{ width: '50%' }} label="Username" />
+      <TextField
+        name="username"
+        sx={{ width: '50%' }}
+        label="Username"
+        error={
+          state?.message.includes('User') || state?.message.includes('username')
+        }
+      />
       <TextField
         name="password"
         sx={{ width: '50%' }}
         label="Password"
         type="password"
+        error={state?.message.includes('password')}
       />
       <FormControlLabel
         control={<Checkbox />}
@@ -70,13 +79,13 @@ const Login = () => {
           Register
         </Link>
       </Typography>
-      {state && (
-        <Typography
-          variant="subtitle1"
-          color={state.successFull ? 'green' : 'red'}
+      {state?.message && (
+        <Alert
+          variant="outlined"
+          severity={state?.successFull ? 'success' : 'error'}
         >
-          {state.message as string}
-        </Typography>
+          {state?.message}
+        </Alert>
       )}
     </form>
   );

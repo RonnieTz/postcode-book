@@ -2,11 +2,12 @@
 
 import React, { use } from 'react';
 import '../styles.css';
-import { TextField, Button, Typography } from '@mui/material';
+import { TextField, Button, Typography, Alert } from '@mui/material';
 import Link from 'next/link';
 import { register } from '@/utilities/actions/register';
 import { useFormState } from 'react-dom';
 import { useEffect } from 'react';
+import RegisterButton from './RegisterButton';
 
 const Register = () => {
   const [state, action] = useFormState(register, null);
@@ -34,14 +35,7 @@ const Register = () => {
         type="password"
       />
 
-      <Button
-        sx={{ width: '20%', height: '3rem' }}
-        variant="contained"
-        color="primary"
-        type="submit"
-      >
-        Register
-      </Button>
+      <RegisterButton />
       <Typography textAlign={'center'} variant="body2" sx={{ width: '50%' }}>
         Already have an account?{' '}
         <Link
@@ -56,13 +50,14 @@ const Register = () => {
           Login
         </Link>
       </Typography>
-      {state && (
-        <Typography
-          variant="subtitle1"
-          color={state.successFull ? 'green' : 'red'}
+
+      {state?.message && (
+        <Alert
+          variant="outlined"
+          severity={state?.successFull ? 'success' : 'error'}
         >
-          {state.message as string}
-        </Typography>
+          {state?.message}
+        </Alert>
       )}
     </form>
   );
