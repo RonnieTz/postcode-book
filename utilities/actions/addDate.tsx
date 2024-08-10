@@ -22,7 +22,7 @@ export const addDate = async (
   try {
     await connectToDatabase();
     const listing = await Listing.findOne({ _id });
-    const today = new Date().toLocaleDateString();
+    const today = new Date().toDateString();
     if (!listing) {
       return { successfull: false, message: 'Listing not found' };
     }
