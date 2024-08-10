@@ -1,8 +1,9 @@
 import { connect } from 'mongoose';
 
 export const connectToDatabase = async () => {
+  const mongo_uri = process.env.MONGO_DB;
   try {
-    await connect('mongodb://localhost:27017/postcodes');
+    await connect(mongo_uri!);
   } catch (err) {
     console.log(err);
   }
