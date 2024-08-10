@@ -13,9 +13,7 @@ import { useEffect, useState, useRef } from 'react';
 import { useFormState } from 'react-dom';
 import { fetchListings } from '@/utilities/actions/fetchListings';
 
-const AddButton = ({
-  setListings,
-}: {
+type Props = {
   setListings: React.Dispatch<
     React.SetStateAction<
       {
@@ -27,11 +25,19 @@ const AddButton = ({
       }[]
     >
   >;
-}) => {
+  setSnackbarOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  setSnackbarMessage: React.Dispatch<React.SetStateAction<string>>;
+};
+
+const AddButton = ({
+  setListings,
+  setSnackbarMessage,
+  setSnackbarOpen,
+}: Props) => {
   const [open, setOpen] = useState(false);
   const [site, setSite] = useState('');
-  const [postCode, setPostCode] = useState('');
-  const [siteManager, setSiteManager] = useState('');
+  const [_postCode, setPostCode] = useState('');
+  const [_siteManager, setSiteManager] = useState('');
   const [state, action] = useFormState(addListing, null);
   const token = useRef('');
 
@@ -47,8 +53,11 @@ const AddButton = ({
 
     const fetchData = async () => {
       const data = await fetchListings(token.current);
+      const listings = await JSON.parse(data).listings;
 
-      setListings(await JSON.parse(data).listings);
+      setListings(listings);
+      setSnackbarMessage(`Successfully added "${site}"`);
+      setSnackbarOpen(true);
     };
     fetchData();
   }, [state]);
@@ -97,8 +106,8 @@ const AddButton = ({
           >
             Submit
           </Button>
-          <Typography color={state?.successfull ? 'green' : 'red'}>
-            {state?.message}
+          <Typography marginTop={3} color={'red'}>
+            {!state?.successfull && state?.message}
           </Typography>
         </form>
       </Dialog>

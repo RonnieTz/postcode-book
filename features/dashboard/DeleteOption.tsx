@@ -27,14 +27,22 @@ type Props = {
       }[]
     >
   ) => void;
+  setSnackbarOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  setSnackbarMessage: React.Dispatch<React.SetStateAction<string>>;
 };
 
-const DeleteOption = ({ site, id, setListings }: Props) => {
+const DeleteOption = ({
+  site,
+  id,
+  setListings,
+  setSnackbarMessage,
+  setSnackbarOpen,
+}: Props) => {
   const [open, setOpen] = useState(false);
   const close = () => {
     setOpen(false);
   };
-  const remove = async () => {
+  const remove = async (site: string) => {
     setOpen(false);
     const token =
       localStorage.getItem('token')! || sessionStorage.getItem('token')!;
@@ -42,6 +50,8 @@ const DeleteOption = ({ site, id, setListings }: Props) => {
     if (res.successfull) {
       const data = await fetchListings(token);
       setListings(await JSON.parse(data).listings);
+      setSnackbarMessage(`Successfully deleted "${site}"`);
+      setSnackbarOpen(true);
     }
   };
 
@@ -53,7 +63,7 @@ const DeleteOption = ({ site, id, setListings }: Props) => {
           <Typography variant="h5">{site}</Typography>
         </DialogTitle>
         <Divider />
-        <Button onClick={remove}>
+        <Button onClick={() => remove(site)}>
           <DeleteForeverIcon color="error" fontSize="large" />
         </Button>
         <Button onClick={close}>Cancel</Button>

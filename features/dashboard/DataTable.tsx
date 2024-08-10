@@ -14,6 +14,8 @@ import {
   List,
   ListItem,
   Button,
+  Snackbar,
+  Alert,
 } from '@mui/material';
 import React, { useEffect, useState } from 'react';
 import AddDate from './AddDate';
@@ -22,8 +24,11 @@ import { fetchListings } from '@/utilities/actions/fetchListings';
 import SiteManagerDialog from './SiteManagerDialog';
 import DateCell from './DateCell';
 import DeleteOption from './DeleteOption';
+import { set } from 'mongoose';
 
 const DataTable = () => {
+  const [snackbarOpen, setSnackbarOpen] = useState(false);
+  const [snackbarMessage, setSnackbarMessage] = useState('');
   const [listings, setListings] = useState<
     {
       _id: string;
@@ -61,6 +66,8 @@ const DataTable = () => {
                   site={data.site}
                   id={data._id}
                   setListings={setListings}
+                  setSnackbarOpen={setSnackbarOpen}
+                  setSnackbarMessage={setSnackbarMessage}
                 />
               </TableCell>
               <TableCell align="center">{data.postCode}</TableCell>
@@ -78,11 +85,25 @@ const DataTable = () => {
           ))}
           <TableRow>
             <TableCell padding="none" align="center" colSpan={4}>
-              <AddButton setListings={setListings} />
+              <AddButton
+                setListings={setListings}
+                setSnackbarOpen={setSnackbarOpen}
+                setSnackbarMessage={setSnackbarMessage}
+              />
             </TableCell>
           </TableRow>
         </TableBody>
       </Table>
+      <Snackbar
+        open={snackbarOpen}
+        autoHideDuration={3000}
+        onClose={() => {
+          setSnackbarOpen(false);
+          setTimeout(() => setSnackbarMessage(''), 3000);
+        }}
+      >
+        <Alert severity="success">{snackbarMessage}</Alert>
+      </Snackbar>
     </Box>
   );
 };
