@@ -1,0 +1,13 @@
+.login {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: 100vh;
+  background-color: #f1f1f1;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+  gap: 30px;
+  width: 100%;
+  margin: 0 auto;
+}
