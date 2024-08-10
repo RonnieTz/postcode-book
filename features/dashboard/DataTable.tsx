@@ -20,9 +20,10 @@ import AddDate from './AddDate';
 import AddButton from './AddButton';
 import { fetchListings } from '@/utilities/actions/fetchListings';
 import SiteManagerDialog from './SiteManagerDialog';
+import DateCell from './DateCell';
+import DeleteOption from './DeleteOption';
 
 const DataTable = () => {
-  const today = new Date().toLocaleDateString();
   const [listings, setListings] = useState<
     {
       _id: string;
@@ -55,7 +56,13 @@ const DataTable = () => {
         <TableBody>
           {listings.map((data, index) => (
             <TableRow key={index}>
-              <TableCell align="center">{data.site}</TableCell>
+              <TableCell align="center">
+                <DeleteOption
+                  site={data.site}
+                  id={data._id}
+                  setListings={setListings}
+                />
+              </TableCell>
               <TableCell align="center">{data.postCode}</TableCell>
               <TableCell align="center">
                 <SiteManagerDialog
@@ -65,36 +72,7 @@ const DataTable = () => {
                 />
               </TableCell>
               <TableCell align="center">
-                <Accordion>
-                  <AccordionSummary>
-                    <Typography width={'100%'}>View</Typography>
-                  </AccordionSummary>
-                  <AccordionDetails>
-                    <List>
-                      {data.datesVisited.map((date, index) => (
-                        <ListItem
-                          sx={{
-                            display: 'flex',
-                            justifyContent: 'center',
-                            alignItems: 'center',
-                          }}
-                          key={index}
-                        >
-                          {date}
-                        </ListItem>
-                      ))}
-                      <ListItem
-                        sx={{
-                          display: 'flex',
-                          justifyContent: 'center',
-                          alignItems: 'center',
-                        }}
-                      >
-                        <AddDate setListings={setListings} id={data._id} />
-                      </ListItem>
-                    </List>
-                  </AccordionDetails>
-                </Accordion>
+                <DateCell data={data} setListings={setListings} />
               </TableCell>
             </TableRow>
           ))}
