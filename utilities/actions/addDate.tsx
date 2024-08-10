@@ -21,10 +21,17 @@ export const addDate = async (
 
   try {
     await connectToDatabase();
-    await Listing.updateOne(
-      { _id },
-      { $push: { datesVisited: new Date().toLocaleDateString() } }
-    );
+    const listing = await Listing.findOne({ _id });
+    const today = new Date().toLocaleDateString();
+    if (!listing) {
+      return { successfull: false, message: 'Listing not found' };
+    }
+    if (listing.datesVisited.includes(today)) {
+      return { successfull: false, message: 'Already added' };
+    }
+    console.log(listing.datesVisited);
+
+    await Listing.updateOne({ _id }, { $push: { datesVisited: today } });
     return { successfull: true, message: 'Date added' };
   } catch (error) {
     return { successfull: false, message: 'Something went wrong' };

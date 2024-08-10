@@ -3,6 +3,7 @@ import { addDate } from '@/utilities/actions/addDate';
 import { Button } from '@mui/material';
 import { useFormState } from 'react-dom';
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
+import AddIcon from '@mui/icons-material/Add';
 import { useEffect } from 'react';
 import { fetchListings } from '@/utilities/actions/fetchListings';
 
@@ -15,6 +16,7 @@ const AddDate = ({
     React.SetStateAction<
       {
         _id: string;
+        site: string;
         postCode: string;
         siteManager: string;
         datesVisited: string[];
@@ -39,7 +41,7 @@ const AddDate = ({
       <input type="hidden" value={id} name="_id" />
       <input type="hidden" value={token!} name="token" />
       <Button type="submit">
-        <AddCircleOutlineIcon />
+        <AddIcon />
       </Button>
     </form>
   );

@@ -19,11 +19,14 @@ import React, { useEffect, useState } from 'react';
 import AddDate from './AddDate';
 import AddButton from './AddButton';
 import { fetchListings } from '@/utilities/actions/fetchListings';
+import SiteManagerDialog from './SiteManagerDialog';
 
 const DataTable = () => {
+  const today = new Date().toLocaleDateString();
   const [listings, setListings] = useState<
     {
       _id: string;
+      site: string;
       postCode: string;
       siteManager: string;
       datesVisited: string[];
@@ -34,13 +37,10 @@ const DataTable = () => {
       localStorage.getItem('token')! || sessionStorage.getItem('token')!;
     const fetchData = async () => {
       const data = await fetchListings(token);
-      console.log(data);
-
       setListings(await JSON.parse(data).listings);
     };
     fetchData();
   }, []);
-  console.log(listings);
   return (
     <Box marginTop={5} maxWidth={'100vw'}>
       <Table sx={{ maxWidth: '100vw' }}>
@@ -55,9 +55,15 @@ const DataTable = () => {
         <TableBody>
           {listings.map((data, index) => (
             <TableRow key={index}>
-              <TableCell align="center">Site Name</TableCell>
+              <TableCell align="center">{data.site}</TableCell>
               <TableCell align="center">{data.postCode}</TableCell>
-              <TableCell align="center">{data.siteManager}</TableCell>
+              <TableCell align="center">
+                <SiteManagerDialog
+                  setListings={setListings}
+                  id={data._id}
+                  siteManager={data.siteManager}
+                />
+              </TableCell>
               <TableCell align="center">
                 <Accordion>
                   <AccordionSummary>
@@ -93,7 +99,7 @@ const DataTable = () => {
             </TableRow>
           ))}
           <TableRow>
-            <TableCell padding="none" align="center" colSpan={3}>
+            <TableCell padding="none" align="center" colSpan={4}>
               <AddButton setListings={setListings} />
             </TableCell>
           </TableRow>

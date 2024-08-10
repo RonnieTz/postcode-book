@@ -11,8 +11,12 @@ export const addListing = async function (
   const token_key = process.env.TOKEN_KEY!;
   const token = formData.get('token') as string;
   const decoded = verify(token, token_key) as { username: string };
+  const site = formData.get('site') as string;
   const postCode = formData.get('postCode') as string;
   const siteManager = formData.get('siteManager') as string;
+  if (!site) {
+    return { message: 'Site is required', successfull: false };
+  }
   if (!postCode) {
     return { message: 'Postcode is required', successfull: false };
   }
@@ -32,6 +36,7 @@ export const addListing = async function (
       return { message: 'Listing already exists', successfull: false };
     }
     const listing = new Listing({
+      site,
       postCode,
       siteManager,
       user: decoded.username,

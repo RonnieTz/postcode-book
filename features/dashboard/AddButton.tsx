@@ -20,6 +20,7 @@ const AddButton = ({
     React.SetStateAction<
       {
         _id: string;
+        site: string;
         postCode: string;
         siteManager: string;
         datesVisited: string[];
@@ -28,6 +29,7 @@ const AddButton = ({
   >;
 }) => {
   const [open, setOpen] = useState(false);
+  const [site, setSite] = useState('');
   const [postCode, setPostCode] = useState('');
   const [siteManager, setSiteManager] = useState('');
   const [state, action] = useFormState(addListing, null);
@@ -67,6 +69,12 @@ const AddButton = ({
       <Dialog fullWidth onClose={() => setOpen(false)} open={open}>
         <DialogTitle>Add new listing</DialogTitle>
         <form action={action} style={{ margin: '40px' }}>
+          <TextField
+            onChange={(e) => setSite(e.target.value)}
+            fullWidth
+            label={'Site'}
+            name="site"
+          />
           <TextField
             onChange={(e) => setPostCode(e.target.value)}
             margin="normal"
