@@ -18,6 +18,9 @@ import { useState, useEffect } from 'react';
 const Login = () => {
   const [state, action] = useFormState(login, null);
   const [remember, setRemember] = useState(false);
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const [hidden, setHidden] = useState(false);
   useEffect(() => {
     if (state?.successFull && remember) {
       localStorage.setItem('token', state.token as string);
@@ -35,16 +38,20 @@ const Login = () => {
   return (
     <form action={action} className="login">
       <TextField
+        value={username}
+        onChange={(e) => setUsername(e.target.value)}
         name="username"
-        sx={{ width: '50%' }}
+        sx={{ width: '50%', visibility: hidden ? 'hidden' : 'visible' }}
         label="Username"
         error={
           state?.message.includes('User') || state?.message.includes('username')
         }
       />
       <TextField
+        value={password}
+        onChange={(e) => setPassword(e.target.value)}
         name="password"
-        sx={{ width: '50%' }}
+        sx={{ width: '50%', visibility: hidden ? 'hidden' : 'visible' }}
         label="Password"
         type="password"
         error={state?.message.includes('password')}
@@ -55,7 +62,7 @@ const Login = () => {
         onChange={(e) => setRemember(e.target.checked)}
         checked={remember}
         label="Remember me"
-        sx={{ width: '49%' }}
+        sx={{ width: '49%', visibility: hidden ? 'hidden' : 'visible' }}
       />
       <Button
         sx={{ width: '20%', height: '3rem' }}
@@ -65,6 +72,20 @@ const Login = () => {
       >
         Login
       </Button>
+      <Button
+        onClick={() => {
+          setHidden(true);
+          setUsername('guest');
+          setPassword('guest');
+        }}
+        sx={{ width: '5%', height: '2rem' }}
+        variant="contained"
+        color="secondary"
+        type="submit"
+      >
+        Guest
+      </Button>
+
       <Typography textAlign={'center'} variant="body2" sx={{ width: '50%' }}>
         Don't have an account?{' '}
         <Link

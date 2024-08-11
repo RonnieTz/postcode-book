@@ -94,16 +94,18 @@ const DataTable = () => {
           </TableRow>
         </TableBody>
       </Table>
-      <Snackbar
-        open={snackbarOpen}
-        autoHideDuration={3000}
-        onClose={() => {
-          setSnackbarOpen(false);
-          setTimeout(() => setSnackbarMessage(''), 3000);
-        }}
-      >
-        <Alert severity="success">{snackbarMessage}</Alert>
-      </Snackbar>
+      {snackbarOpen && (
+        <Snackbar
+          open={snackbarOpen}
+          autoHideDuration={3000}
+          onClose={() => {
+            setSnackbarOpen(false);
+            setTimeout(() => setSnackbarMessage(''), 3000);
+          }}
+        >
+          <Alert severity="success">{snackbarMessage}</Alert>
+        </Snackbar>
+      )}
     </Box>
   );
 };

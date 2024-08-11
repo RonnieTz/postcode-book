@@ -56,8 +56,10 @@ const AddButton = ({
       const listings = await JSON.parse(data).listings;
 
       setListings(listings);
-      setSnackbarMessage(`Successfully added "${site}"`);
-      setSnackbarOpen(true);
+      if (site) {
+        setSnackbarMessage(`Successfully added "${site}"`);
+        setSnackbarOpen(true);
+      }
     };
     fetchData();
   }, [state]);
