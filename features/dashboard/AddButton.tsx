@@ -12,19 +12,10 @@ import { addListing } from '@/utilities/actions/addListing';
 import { useEffect, useState, useRef } from 'react';
 import { useFormState } from 'react-dom';
 import { fetchListings } from '@/utilities/actions/fetchListings';
+import { SetListings } from '@/utilities/types';
 
 type Props = {
-  setListings: React.Dispatch<
-    React.SetStateAction<
-      {
-        _id: string;
-        site: string;
-        postCode: string;
-        siteManager: string;
-        datesVisited: string[];
-      }[]
-    >
-  >;
+  setListings: SetListings;
   setSnackbarOpen: React.Dispatch<React.SetStateAction<boolean>>;
   setSnackbarMessage: React.Dispatch<React.SetStateAction<string>>;
 };
@@ -38,6 +29,7 @@ const AddButton = ({
   const [site, setSite] = useState('');
   const [_postCode, setPostCode] = useState('');
   const [_siteManager, setSiteManager] = useState('');
+  const [company, setCompany] = useState('');
   const [state, action] = useFormState(addListing, null);
   const token = useRef('');
 
@@ -94,10 +86,18 @@ const AddButton = ({
             label={'Postcode'}
           />
           <TextField
+            onChange={(e) => setCompany(e.target.value)}
+            fullWidth
+            label={'Company'}
+            name="company"
+            margin="normal"
+          />
+          <TextField
             onChange={(e) => setSiteManager(e.target.value)}
             fullWidth
             label={'Site Manager'}
             name="siteManager"
+            margin="normal"
           />
           <input type="hidden" name={'token'} value={token.current} />
           <Button

@@ -12,21 +12,12 @@ import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import { useState } from 'react';
 import { deleteListing } from '@/utilities/actions/deleteListing';
 import { fetchListings } from '@/utilities/actions/fetchListings';
+import { Listing, SetListings } from '@/utilities/types';
 
 type Props = {
   site: string;
   id: string;
-  setListings: (
-    value: React.SetStateAction<
-      {
-        _id: string;
-        site: string;
-        postCode: string;
-        siteManager: string;
-        datesVisited: string[];
-      }[]
-    >
-  ) => void;
+  setListings: SetListings;
   setSnackbarOpen: React.Dispatch<React.SetStateAction<boolean>>;
   setSnackbarMessage: React.Dispatch<React.SetStateAction<string>>;
 };

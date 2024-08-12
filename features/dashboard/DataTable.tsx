@@ -24,20 +24,12 @@ import { fetchListings } from '@/utilities/actions/fetchListings';
 import SiteManagerDialog from './SiteManagerDialog';
 import DateCell from './DateCell';
 import DeleteOption from './DeleteOption';
-import { set } from 'mongoose';
+import { Listing } from '@/utilities/types';
 
 const DataTable = () => {
   const [snackbarOpen, setSnackbarOpen] = useState(false);
   const [snackbarMessage, setSnackbarMessage] = useState('');
-  const [listings, setListings] = useState<
-    {
-      _id: string;
-      site: string;
-      postCode: string;
-      siteManager: string;
-      datesVisited: string[];
-    }[]
-  >([]);
+  const [listings, setListings] = useState<Listing[]>([]);
   useEffect(() => {
     const token =
       localStorage.getItem('token')! || sessionStorage.getItem('token')!;
@@ -54,6 +46,7 @@ const DataTable = () => {
           <TableRow>
             <TableCell align="center">SITE NAME</TableCell>
             <TableCell align="center">POSTCODE</TableCell>
+            <TableCell align="center">COMPANY</TableCell>
             <TableCell align="center">SITE MANAGER</TableCell>
             <TableCell align="center">DATES VISITED</TableCell>
           </TableRow>
@@ -71,6 +64,7 @@ const DataTable = () => {
                 />
               </TableCell>
               <TableCell align="center">{data.postCode}</TableCell>
+              <TableCell align="center">{data.company}</TableCell>
               <TableCell align="center">
                 <SiteManagerDialog
                   setListings={setListings}
@@ -84,7 +78,7 @@ const DataTable = () => {
             </TableRow>
           ))}
           <TableRow>
-            <TableCell padding="none" align="center" colSpan={4}>
+            <TableCell padding="none" align="center" colSpan={5}>
               <AddButton
                 setListings={setListings}
                 setSnackbarOpen={setSnackbarOpen}

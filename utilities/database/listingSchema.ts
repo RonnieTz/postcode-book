@@ -4,6 +4,7 @@ const ListingSchema = new Schema({
   site: String,
   postCode: String,
   siteManager: String,
+  company: String,
   datesVisited: [String],
   user: String,
 });

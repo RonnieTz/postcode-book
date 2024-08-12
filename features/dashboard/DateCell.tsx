@@ -13,26 +13,11 @@ import {
 } from '@mui/material';
 import React from 'react';
 import AddDate from './AddDate';
+import { Listing, SetListings } from '@/utilities/types';
 
 type Props = {
-  data: {
-    _id: string;
-    site: string;
-    postCode: string;
-    siteManager: string;
-    datesVisited: string[];
-  };
-  setListings: React.Dispatch<
-    React.SetStateAction<
-      {
-        _id: string;
-        site: string;
-        postCode: string;
-        siteManager: string;
-        datesVisited: string[];
-      }[]
-    >
-  >;
+  data: Listing;
+  setListings: SetListings;
 };
 
 const DateCell = ({ data, setListings }: Props) => {

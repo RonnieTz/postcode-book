@@ -4,20 +4,11 @@ import { Box, Dialog, DialogTitle, TextField, Typography } from '@mui/material';
 import { useState } from 'react';
 import { editSiteManager } from '@/utilities/actions/editListing';
 import { fetchListings } from '@/utilities/actions/fetchListings';
+import { SetListings } from '@/utilities/types';
 type Props = {
   siteManager: string;
   id: string;
-  setListings: React.Dispatch<
-    React.SetStateAction<
-      {
-        _id: string;
-        site: string;
-        postCode: string;
-        siteManager: string;
-        datesVisited: string[];
-      }[]
-    >
-  >;
+  setListings: SetListings;
 };
 
 const SiteManagerDialog = ({ siteManager, id, setListings }: Props) => {

@@ -14,6 +14,9 @@ export const addListing = async function (
   const site = formData.get('site') as string;
   const postCode = formData.get('postCode') as string;
   const siteManager = formData.get('siteManager') as string;
+  const company = formData.get('company') as string;
+  console.log(company);
+
   if (!site) {
     return { message: 'Site is required', successfull: false };
   }
@@ -22,6 +25,9 @@ export const addListing = async function (
   }
   if (!siteManager) {
     return { message: 'Site Manager is required', successfull: false };
+  }
+  if (!company) {
+    return { message: 'Company is required', successfull: false };
   }
   if (!decoded) {
     return { message: 'Invalid token', successfull: false };
@@ -39,6 +45,7 @@ export const addListing = async function (
       site,
       postCode,
       siteManager,
+      company,
       user: decoded.username,
     });
     await listing.save();

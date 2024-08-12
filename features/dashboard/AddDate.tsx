@@ -6,23 +6,14 @@ import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import AddIcon from '@mui/icons-material/Add';
 import { useEffect } from 'react';
 import { fetchListings } from '@/utilities/actions/fetchListings';
+import { Listing } from '@/utilities/types';
 
 const AddDate = ({
   id,
   setListings,
 }: {
   id: string;
-  setListings: React.Dispatch<
-    React.SetStateAction<
-      {
-        _id: string;
-        site: string;
-        postCode: string;
-        siteManager: string;
-        datesVisited: string[];
-      }[]
-    >
-  >;
+  setListings: React.Dispatch<React.SetStateAction<Listing[]>>;
 }) => {
   const [state, action] = useFormState(addDate, null);
   const token =
