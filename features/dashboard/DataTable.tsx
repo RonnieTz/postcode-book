@@ -14,6 +14,7 @@ import DatesDialog from './DatesDialog';
 import { editCompany } from '@/utilities/actions/editCompany';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import { deleteListing } from '@/utilities/actions/deleteListing';
+import { editSiteManager } from '@/utilities/actions/editListing';
 
 const DataTable = () => {
   const [snackbarOpen, setSnackbarOpen] = useState(false);
@@ -93,14 +94,19 @@ const DataTable = () => {
     },
     {
       field: 'siteManager',
-      cellRenderer: (params: ICellRendererParams<Listing>) => {
-        return (
-          <SiteManagerDialog
-            setListings={setListings}
-            id={params.data?._id!}
-            siteManager={params.data?.siteManager!}
-          />
-        );
+      editable: true,
+      onCellValueChanged: async (params) => {
+        const id = params.data._id;
+        const newValue = params.newValue;
+        const token =
+          localStorage.getItem('token')! || sessionStorage.getItem('token')!;
+        const res = await editSiteManager(token, id, newValue);
+        if (res.successfull) {
+          const data = await fetchListings(token);
+          setListings(await JSON.parse(data).listings);
+          setSnackbarMessage(`Successfully updated "${params.data.site}"`);
+          setSnackbarOpen(true);
+        }
       },
     },
     {

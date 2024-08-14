@@ -29,7 +29,7 @@ const AddButton = ({
   const [site, setSite] = useState('');
   const [_postCode, setPostCode] = useState('');
   const [_siteManager, setSiteManager] = useState('');
-  const [company, setCompany] = useState('');
+  const [_company, setCompany] = useState('');
   const [state, action] = useFormState(addListing, null);
   const token = useRef('');
 
