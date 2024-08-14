@@ -93,7 +93,7 @@ const DataTable = () => {
   return (
     <Box marginTop={5} width={'100vw'}>
       <div
-        style={{ width: '100%', height: '82vh' }}
+        style={{ width: '100%', height: '800px' }}
         className="ag-theme-quartz"
       >
         <AgGridReact columnDefs={colDefs} rowData={rowData} />
