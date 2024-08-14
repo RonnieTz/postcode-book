@@ -3,7 +3,7 @@ import { connectToDatabase } from '../database/connect';
 import { User } from '../../utilities/database/UserSchema';
 import { hashSync } from 'bcrypt';
 export const register = async function (
-  initialState: {
+  _initialState: {
     message: string;
     successFull: boolean;
   } | null,

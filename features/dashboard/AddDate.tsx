@@ -1,8 +1,7 @@
 'use client';
 import { addDate } from '@/utilities/actions/addDate';
-import { Button, Divider } from '@mui/material';
+import { Button } from '@mui/material';
 import { useFormState } from 'react-dom';
-import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import AddIcon from '@mui/icons-material/Add';
 import { useEffect } from 'react';
 import { fetchListings } from '@/utilities/actions/fetchListings';
@@ -31,7 +30,7 @@ const AddDate = ({
     <form action={action}>
       <input type="hidden" value={id} name="_id" />
       <input type="hidden" value={token!} name="token" />
-      <Divider />
+
       <Button fullWidth type="submit">
         <AddIcon />
       </Button>

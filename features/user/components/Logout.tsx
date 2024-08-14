@@ -1,8 +1,6 @@
 'use client';
 import { Button } from '@mui/material';
 
-import React from 'react';
-
 const Logout = () => {
   const logout = () => {
     localStorage.removeItem('token');

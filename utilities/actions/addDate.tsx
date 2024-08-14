@@ -5,7 +5,7 @@ import { Listing } from '../database/listingSchema';
 import { verify } from 'jsonwebtoken';
 
 export const addDate = async (
-  initialState: { message: string; successfull: boolean } | null,
+  _initialState: { message: string; successfull: boolean } | null,
   formData: FormData
 ) => {
   const _id = formData.get('_id') as string;

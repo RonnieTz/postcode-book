@@ -4,7 +4,7 @@ import { User } from '../../utilities/database/UserSchema';
 import { compareSync } from 'bcrypt';
 import { sign } from 'jsonwebtoken';
 export const login = async function (
-  initialState: {
+  _initialState: {
     message: string;
     successFull: boolean;
     token: string | null;

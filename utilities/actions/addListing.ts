@@ -5,7 +5,7 @@ import { Listing } from '../database/listingSchema';
 import { verify } from 'jsonwebtoken';
 
 export const addListing = async function (
-  initialState: { message: string; successfull: boolean } | null,
+  _initialState: { message: string; successfull: boolean } | null,
   formData: FormData
 ) {
   const token_key = process.env.TOKEN_KEY!;

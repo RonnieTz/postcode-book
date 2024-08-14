@@ -1,8 +1,6 @@
 import { Button, CircularProgress, Typography } from '@mui/material';
 import { useFormStatus } from 'react-dom';
 
-import React from 'react';
-
 const RegisterButton = () => {
   const { pending } = useFormStatus();
   return (

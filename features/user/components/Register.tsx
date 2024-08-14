@@ -1,8 +1,7 @@
 'use client';
 
-import React, { use } from 'react';
 import '../styles.css';
-import { TextField, Button, Typography, Alert } from '@mui/material';
+import { TextField, Typography, Alert } from '@mui/material';
 import Link from 'next/link';
 import { register } from '@/utilities/actions/register';
 import { useFormState } from 'react-dom';

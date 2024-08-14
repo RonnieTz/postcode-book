@@ -9,10 +9,8 @@ import {
   Divider,
   Typography,
 } from '@mui/material';
-import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import AddDate from './AddDate';
 import { useState } from 'react';
-import { set } from 'mongoose';
 
 type Props = {
   datesVisited: string[];
@@ -33,9 +31,12 @@ const DatesDialog = ({ datesVisited, setListings, id }: Props) => {
         </DialogTitle>
         <Divider variant="fullWidth" />
         {datesVisited.map((date) => (
-          <Typography margin={2} key={date} variant="body1">
-            {date}
-          </Typography>
+          <Box key={date}>
+            <Typography margin={2} key={date} variant="body1">
+              {date}
+            </Typography>
+            <Divider />
+          </Box>
         ))}
         <AddDate setListings={setListings} id={id} />
       </Dialog>
