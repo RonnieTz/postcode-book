@@ -54,9 +54,11 @@ const DeleteOption = ({
           <Typography variant="h5">{site}</Typography>
         </DialogTitle>
         <Divider />
-        <Button onClick={() => remove(site)}>
+
+        <Button sx={{ margin: 2 }} onClick={() => remove(site)}>
           <DeleteForeverIcon color="error" fontSize="large" />
         </Button>
+        <Divider />
         <Button onClick={close}>Cancel</Button>
       </Dialog>
     </Box>

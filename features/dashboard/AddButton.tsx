@@ -65,6 +65,7 @@ const AddButton = ({
           }}
           sx={{ margin: 0 }}
           fullWidth
+          variant="contained"
         >
           <AddCircleOutlineIcon />
         </Button>

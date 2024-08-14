@@ -1,10 +1,19 @@
 'use client';
 
-import { Box, Dialog, DialogTitle, TextField, Typography } from '@mui/material';
+import {
+  Box,
+  Button,
+  Dialog,
+  DialogTitle,
+  Divider,
+  TextField,
+  Typography,
+} from '@mui/material';
 import { useState } from 'react';
 import { editSiteManager } from '@/utilities/actions/editListing';
 import { fetchListings } from '@/utilities/actions/fetchListings';
 import { SetListings } from '@/utilities/types';
+import { set } from 'mongoose';
 type Props = {
   siteManager: string;
   id: string;
@@ -25,13 +34,23 @@ const SiteManagerDialog = ({ siteManager, id, setListings }: Props) => {
 
     setOpen(false);
   };
+
   return (
     <Box>
       <span onClick={() => setOpen(true)}>{siteManager}</span>
-      <Dialog open={open} onClose={save}>
+      <Dialog
+        open={open}
+        onClose={() => {
+          setOpen(false);
+          setNewSiteManager(siteManager);
+        }}
+      >
         <DialogTitle>
-          <Typography variant="h5">Site Manager</Typography>
+          <Typography textAlign={'center'} variant="body1">
+            Site Manager
+          </Typography>
         </DialogTitle>
+        <Divider variant="fullWidth" />
         <TextField
           autoFocus
           onChange={(e) => {
@@ -39,7 +58,15 @@ const SiteManagerDialog = ({ siteManager, id, setListings }: Props) => {
           }}
           size="medium"
           value={newSiteManager}
+          sx={{
+            margin: 2,
+            boxShadow: '0 0 5px 0 black',
+            borderRadius: 1,
+          }}
         />
+        <Button onClick={save} variant="outlined">
+          Save
+        </Button>
       </Dialog>
     </Box>
   );
