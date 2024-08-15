@@ -7,7 +7,6 @@ import {
   TextField,
   Typography,
 } from '@mui/material';
-import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import { addListing } from '@/utilities/actions/addListing';
 import { useEffect, useState, useRef } from 'react';
 import { useFormState } from 'react-dom';
@@ -63,11 +62,10 @@ const AddButton = ({
           onClick={() => {
             setOpen(true);
           }}
-          sx={{ margin: 0 }}
-          fullWidth
+          sx={{ margin: ' 0 5px 0 1px' }}
           variant="contained"
         >
-          <AddCircleOutlineIcon />
+          new
         </Button>
       )}
       <Dialog fullWidth onClose={() => setOpen(false)} open={open}>

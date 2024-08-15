@@ -131,18 +131,19 @@ const DataTable = () => {
         style={{ width: '100%', height: '800px' }}
         className="ag-theme-quartz"
       >
-        <Button
-          variant="contained"
-          onClick={() => setDeleteButton(!deleteButton)}
-        >
-          Delete
-        </Button>
-        <AgGridReact columnDefs={colDefs} rowData={rowData} />
         <AddButton
           setListings={setListings}
           setSnackbarOpen={setSnackbarOpen}
           setSnackbarMessage={setSnackbarMessage}
         />
+        <Button
+          variant="contained"
+          color="error"
+          onClick={() => setDeleteButton(!deleteButton)}
+        >
+          Delete
+        </Button>
+        <AgGridReact columnDefs={colDefs} rowData={rowData} />
         <div style={{ height: '60px', width: '100%' }}></div>
       </div>
 
